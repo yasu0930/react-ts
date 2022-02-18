@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 // import YouTube from 'react-youtube'
-// import { API_KEY } from '../api/request'
+import modal from './modal'
 import axios from "../api/axios"
 import "./styles/Row.scss"
 
@@ -19,6 +19,7 @@ type Movie = {
   original_name: string
   poster_path: string
   backdrop_path: string
+  overview: string
 }
 
 //trailerのoption
@@ -33,6 +34,8 @@ type Movie = {
 export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
   const [movies, setMovies] = useState<Movie[]>([])
   const [trailerUrl, setTrailerUrl] = useState<string | null>("")
+  // const [isCheck, setIsCheck] = useState(false)
+  // const [isMovie, setIsMovie] = useState()
 
   //urlが更新される度に
   useEffect(() => {
@@ -53,13 +56,14 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
   //   },
   // }
 
-  const handleClick = async (movie: Movie) => {
+  const handleClick = (movie: Movie) => {
     if (trailerUrl) {
       setTrailerUrl("")
     } else {
-      // let trailerurl = await axios.get(`/movie/${movie.id}/videos?api_key=${API_KEY}`);
+      // const trailerurl = movie.overview;
       // setTrailerUrl(trailerurl.data.results[0]?.key);
       console.log(movie)
+      modal(movie)
     }
   };
 
@@ -69,15 +73,17 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
       <div className="Row-posters">
         {/* ポスターコンテンツ */}
         {movies.map((movie) => (
-          <img
-            key={movie.id}
-            className={`Row-poster ${isLargeRow && "Row-poster-large"}`}
-            src={`${base_url}${
-              isLargeRow ? movie.poster_path : movie.backdrop_path
-            }`}
-            alt={movie.name}
-            onClick={() => handleClick(movie)}
-          />
+            <>
+              <img
+                key={movie.id}
+                className={`Row-poster ${isLargeRow && "Row-poster-large"}`}
+                src={`${base_url}${
+                  isLargeRow ? movie.poster_path : movie.backdrop_path
+                }`}
+                alt={movie.name}
+                onClick={() => handleClick(movie)}
+              />
+            </>
         ))}
       </div>
       {/* {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />} */}
