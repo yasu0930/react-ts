@@ -24,6 +24,8 @@ type Movie = {
 export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
   const [movies, setMovies] = useState<Movie[]>([])
   const [trailerUrl, setTrailerUrl] = useState<string | null>("")
+  const [isOverView, setIsOverView] = useState<string>("")
+  const [isTitle, setIsTitle] = useState<string>("")
   const [isCheck, setIsCheck] = useState(false)
 
   //urlが更新される度に
@@ -36,12 +38,13 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
     fetchData();
   }, [fetchUrl]);
 
-  const handleClick = (movie: Movie) => {
+  const handleClick = (movie:Movie) => {
     if (trailerUrl) {
       setTrailerUrl("")
     } else {
-      ModalItem(movie)
       setIsCheck(true)
+      setIsTitle(movie.name)
+      setIsOverView(movie.overview)
     }
   };
 
@@ -66,10 +69,10 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
                 onMouseOver={() => handleClick(movie)}
                 onMouseLeave={() => handleClick2()}
               />
-              {isCheck && <ModalItem overview="a"/>}
             </>
         ))}
       </div>
+      {isCheck && <ModalItem title={isTitle} overview={isOverView}/>}
     </div>
   )
 }

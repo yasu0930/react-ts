@@ -1,14 +1,16 @@
 import './styles/Row.scss'
 
-type Movie = {
-  overview: String
+type Item = {
+  title: String,
+  overview : String
 }
 
-const ModalItem = ({ overview} :Movie) => {
-  console.log(overview)
-
+const ModalItem = ({ title, overview } :Item) => {
   return(
-    <div className='aaa'>a</div>
+    <>
+      <div className='aaa'>{title}</div>
+      <div className='aaa'>{overview}</div>
+    </>
   )
 }
 
