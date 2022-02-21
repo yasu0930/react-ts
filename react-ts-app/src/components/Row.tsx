@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
-// import YouTube from 'react-youtube'
-import modal from './modal'
+import ModalItem from './ModalItem'
 import axios from "../api/axios"
 import "./styles/Row.scss"
 
@@ -22,20 +21,10 @@ type Movie = {
   overview: string
 }
 
-//trailerのoption
-// type Options = {
-//   height: string
-//   width: string
-//   playerVars: {
-//     autoplay: 0 | 1 | undefined
-//   }
-// }
-
 export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
   const [movies, setMovies] = useState<Movie[]>([])
   const [trailerUrl, setTrailerUrl] = useState<string | null>("")
-  // const [isCheck, setIsCheck] = useState(false)
-  // const [isMovie, setIsMovie] = useState()
+  const [isCheck, setIsCheck] = useState(false)
 
   //urlが更新される度に
   useEffect(() => {
@@ -47,25 +36,18 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
     fetchData();
   }, [fetchUrl]);
 
-  // const opts: Options = {
-  //   height: "390",
-  //   width: "640",
-  //   playerVars: {
-  //     // https://developers.google.com/youtube/player_parameters
-  //     autoplay: 1,
-  //   },
-  // }
-
   const handleClick = (movie: Movie) => {
     if (trailerUrl) {
       setTrailerUrl("")
     } else {
-      // const trailerurl = movie.overview;
-      // setTrailerUrl(trailerurl.data.results[0]?.key);
-      console.log(movie)
-      modal(movie)
+      ModalItem(movie)
+      setIsCheck(true)
     }
   };
+
+  const handleClick2 = () => {
+    setIsCheck(false)
+  }
 
   return (
     <div className="Row">
@@ -81,13 +63,13 @@ export const Row = ({ title, fetchUrl, isLargeRow }: Props) => {
                   isLargeRow ? movie.poster_path : movie.backdrop_path
                 }`}
                 alt={movie.name}
-                onClick={() => handleClick(movie)}
+                onMouseOver={() => handleClick(movie)}
+                onMouseLeave={() => handleClick2()}
               />
+              {isCheck && <ModalItem overview="a"/>}
             </>
         ))}
       </div>
-      {/* {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />} */}
-      {/* <YouTube videoId='G1cC45Mr0HU' opts={opts} />  */}
     </div>
   )
 }
