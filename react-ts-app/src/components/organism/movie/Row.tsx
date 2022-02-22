@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import ModalItem from './ModalItem'
-import axios from "../api/axios"
-import "./styles/Row.scss"
+import axios from "../../../api/axios"
+import "../../styles/Row.scss"
 
 const base_url = "https://image.tmdb.org/t/p/original"
 

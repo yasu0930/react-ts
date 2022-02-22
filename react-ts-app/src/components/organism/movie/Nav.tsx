@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./styles/Nav.scss";
+import "../../styles/Nav.scss";
 
 export const Nav = () => {
   const [show, setShow] = useState(false);

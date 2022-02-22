@@ -1,4 +1,4 @@
-import './styles/Row.scss'
+import '../../styles/Row.scss'
 
 type Item = {
   title: String,

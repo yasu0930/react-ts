@@ -1,7 +1,7 @@
 import "./styles/App.css";
-import { Row } from "./Row";
-import { Banner } from "./Banner";
-import { Nav } from "./Nav";
+import { Row } from "./organism/movie/Row";
+import { Banner } from "./organism/movie/Banner";
+import { Nav } from "./organism/movie/Nav";
 import { requests } from "../api/request";
 
 const App = () => {
