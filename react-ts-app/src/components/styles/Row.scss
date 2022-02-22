@@ -35,7 +35,21 @@
     }
 }
 
-.aaa {
-    font-size: 10px;
+.main {
+    width: 50%;
+    background-color: aliceblue;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.title {
+    margin-top: 5px;
+    font-size: 20px;
     color: red;
+}
+
+.subTitle {
+    margin-top: 5px;
+    font-size: 15px;
+    color: Gray;
 }

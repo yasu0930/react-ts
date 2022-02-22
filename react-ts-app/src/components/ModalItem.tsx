@@ -7,10 +7,10 @@ type Item = {
 
 const ModalItem = ({ title, overview } :Item) => {
   return(
-    <>
-      <div className='aaa'>{title}</div>
-      <div className='aaa'>{overview}</div>
-    </>
+    <div className='main'>
+      <div className='title'>{title}</div>
+      <div className='subTitle '>{overview}</div>
+    </div>
   )
 }
 
